@@ -22,5 +22,6 @@
       "source": "/public/(.*)",
       "destination": "/public/$1"
     }
-  ]
+  ],
+  "framework": "express"
 }

@@ -1,0 +1,12 @@
+api/controllers
+api/middleware
+api/models
+api/config
+.git
+node_modules
+temp
+design
+public
+views
+*.sql
+*.bak

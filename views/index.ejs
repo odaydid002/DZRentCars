@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="/style/lib/fontawesome/all.min.css">
+    <link rel="stylesheet" href="/style/main.css">
+    <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/lib/node_modules/mapbox-gl/dist/mapbox-gl.css">
+    <link rel="stylesheet" href="/style/mobile.css">
+    <link rel="stylesheet" href="/style/lagreScreen.css">
+    <title>DZRentCar</title>
+</head>
+<body style="overflow-y: auto;">
+    <i class="fa-solid fa-bars menu-icon" id="homeNavIcon"></i>
+    <button class="bt bt-hover gotop flex-row flex-center" id="goTop" title="Up"><i class="fa-solid fa-caret-up"></i></button>
+    <img class="map-img" src="assets/images/map.png" alt="Maps">
+    <nav class="main-navigator flex-row" id="mainNavigator">
+        <i class="fa-solid fa-xmark close-x" id="homeNavClose"></i>
+        <div class="flex-row flex-center logo">
+            <img src="assets/logo.png" alt="Logo" class="logo" id="navLogo">
+            <h1 class="title-min">DZ Rent<span style="color: var(--color-main);">Cars</span></h1>
+        </div>
+        <div class="flex-row nav-links">
+            <ul class="flex-row nav-elements">
+                <li class="nav-element hover-scale"><a href="#aboutSection">About</a></li>
+                <li class="nav-element hover-scale"><a href="#carsSection">Cars</a></li>
+                <li class="nav-element hover-scale"><a href="#featuresSection">Features</a></li>
+                <li class="nav-element hover-scale"><a href="#getApp">Location</a></li>
+            </ul>
+            <a href="/login"><button class="bt bt-hover account" id="account">Get In Touch</button></a>
+        </div>
+    </nav>
+    <main class="main-doc flex-col" id="mainDoc">
+        <section class="doc-section flex-col flex-center" id="aboutSection">
+            <div class="flex-col about-content">
+                <div class="flex-row about-cont" style="margin-top: var(--nav-height);">
+                    <div class="flex-col">
+                        <h1 class="blk-txt title-xlarge flex-col about-title">
+                            <span>Premium</span>
+                            <span>Car Rental</span>
+                            <span>in Algeria <span>
+                        <h1>
+                        <p class="about-desc para-mid" style="max-width: 60%;">Do not deprive yourself of the pleasure of driving the most luxurious cars, as you do not need to buy them at exorbitant prices. Move freely and fulfill your needs in the shortest time.</p>
+                    </div>
+                    <svg class="car-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="960" viewBox="0 0 1280 960" fill="none">
+                        <rect width="1280" height="960"/>
+                        <g id="Group 1">
+                        <rect id="wheel" x="173" y="509" width="186" height="186" fill="url(#pattern0_0_1)"/>
+                        <rect id="car" width="1280" height="960" fill="url(#pattern1_0_1)"/>
+                        </g>
+                        <defs>
+                        <pattern id="pattern0_0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#imageWheel" transform="scale(0.00543478)"/>
+                        </pattern>
+                        <pattern id="pattern1_0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#imageCar" transform="scale(0.00078125 0.00104167)"/>
+                        </pattern>
+                        <image id="imageWheel" data-name="image.png" width="184" height="184" href="assets/images/hyundai_wheel.png"/>
+                        <image id="imageCar" data-name="carnowheel.png" width="1280" height="960" href="assets/images/hyundai_no_wheel.png"/>
+                        </defs>
+                    </svg>
+                </div>
+                <ul class="cars-logo flex-row">
+                    <li class="car-logo"><img src="assets/cars/audi.png" alt="audi" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/bmw.png" alt="bmw" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/chevrolet.png" alt="chevrolet" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/citroen.png" alt="citroen" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/ford.png" alt="ford" class="car-logo-image"></li>
+                    <li class="car-logo car-logo-selected"><img src="assets/cars/hyundai.png" alt="hyundai" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/kia.png" alt="kia" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/mazda.png" alt="mazda" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/mitsubishi.png" alt="mitsubishi" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/nissan.png" alt="nissan" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/opel.png" alt="opel" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/peugeot.png" alt="peugeot" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/renault.png" alt="renault" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/seat.png" alt="seat" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/skoda.png" alt="skoda" class="car-logo-image"></li>
+                    <li class="car-logo"><img src="assets/cars/volkswagen.png" alt="volkswagen" class="car-logo-image"></li>
+                </ul>
+            </div>
+        </section>
+        <section class="doc-section flex-row" id="appSection">
+            <div class="phones-container">
+                <img width="500px" src="assets/images/mobile.png" alt="Phone" class="phone-frame frame1">
+                <img width="500px" src="assets/images/mobile2.png" alt="Phone" class="phone-frame frame2">
+            </div>
+            <div class="app-desc flex-col">
+                <div class="desc">
+                <h1 class="blg-txt title-large">Mobile App</h1>
+                    <p class="para-mid" style="max-width: 70%; margin:5vh 0;">Introducing our new car rental app! Rent a car on-the-go with ease and flexibility. Browse a wide range of vehicles, book instantly, and manage your rentals from your smartphone. Enjoy transparent pricing, 24/7 support, and exclusive app-only deals. Download now and hit the road hassle-free!</p>
+                    <div class="flex-row">
+                        <button class="bt bt-hover app-but">
+                            <i class="fa-brands fa-apple"></i>
+                            App store
+                        </button>
+                        <button class="bt bt-hover app-but">
+                            <i class="fa-brands fa-google-play"></i>
+                            Play store
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="doc-section cars-section flex-col" id="carsSection">
+            <div class="cars-desc flex-col flex-center">
+                <h4 class="low-text-sml">ONLY THE BEST CARS</h4>
+                <h1 class="blg-txt title-large">Collection of vehicles</h1>
+                <p class="para-mid" style="width: 60%;">Explore our Collection of Vehicles—a wide range of cars, SUVs, trucks, and vans for every need. From compact rides to spacious family vehicles, we’ve got you covered. Find the perfect rental for any trip or task with ease and reliability. With DzRentCars your ideal ride is just a click away!</p>
+            </div>
+            <ul class="cars-types flex-row flex-center">
+                <li class="car-type car-type-sel bt-hover">Premium</li>
+                <li class="car-type bt-hover">Off-Road</li>
+                <li class="car-type bt-hover">Hybrid</li>
+                <li class="car-type car-type-sel bt-hover">Sport</li>
+                <li class="car-type bt-hover">SUV</li>
+                <li class="car-type bt-hover">Electric</li>
+            </ul>
+            <div class="car-images-container flex-col flex-center">
+                <div class="flex-row cars-line">
+                    <div class="type-image flex-col flex-center">
+                        <p class="car-name flex-row flex-center">KIA</p>
+                        <img class="car-img prevable" src="assets/images/kia2018.jpg" alt="KIA">
+                        <p class="car-price flex-row flex-center">800 dzd/h</p>
+                    </div>
+                    <div class="type-image flex-col flex-center">
+                        <p class="car-name flex-row flex-center">BMW</p>
+                        <img class="car-img prevable" src="assets/images/BMW.jpg" alt="BMW">
+                        <p class="car-price flex-row flex-center">1000 dzd/h</p>
+                    </div>
+                    <div class="type-image flex-col flex-center">
+                        <p class="car-name flex-row flex-center">Toyota</p>
+                        <img class="car-img prevable" src="assets/images/toyota.jpg" alt="Toyota">
+                        <p class="car-price flex-row flex-center">880 dzd/h</p>
+                    </div>
+                </div>
+                <div class="flex-row cars-line">
+                    <div class="type-image-s flex-col flex-center">
+                        <p class="car-name flex-row flex-center">Ford</p>
+                        <img class="car-img prevable" src="assets/images/ford.jpg" alt="Ford">
+                        <p class="car-price flex-row flex-center">890 dzd/h</p>
+                    </div>
+                    <div class="type-image-s flex-col flex-center">
+                        <p class="car-name flex-row flex-center">Hyundai</p>
+                        <img class="car-img prevable" src="assets/images/hyundai.jpg" alt="Accent">
+                        <p class="car-price flex-row flex-center">600 dzd/h</p>
+                    </div>
+                    <div class="type-image-s flex-col flex-center">
+                        <p class="car-name flex-row flex-center">Nissan</p>
+                        <img class="car-img prevable" src="assets/images/nissan.jpg" alt="Nissan">
+                        <p class="car-price flex-row flex-center">1090 dzd/h</p>
+                    </div>
+                    <div class="type-image-s flex-col flex-center">
+                        <p class="car-name flex-row flex-center">Audi</p>
+                        <img class="car-img prevable" src="assets/images/audi.jpg" alt="Audi">
+                        <p class="car-price flex-row flex-center">1800 dzd/h</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <a href="/home" class="explore-linl bt-hover">Explore more →</a>
+        </section>
+        <section class="doc-section features-section flex-col" id="featuresSection">
+            <div class="features-desc flex-col">
+                <h4 class="low-text-sml">Rent. Drive. Explore.</h4>
+                <h1 class="blg-txt title-large">Our Features</h1>
+                <p class="para-mid" style="width: 50%;">We prioritize your comfort with seamless bookings, reliable support, and top-quality vehicles—ensuring a hassle-free rental experience every time. Your satisfaction drives us to deliver excellence.</p>
+            </div>
+            <div class="features flex-row">
+                <div class="feature-container flex-col">
+                    <p class="feature-icon"><i class="fa-solid fa-calendar-check" style="color: rgb(147, 34, 34);"></i></p>
+                    <p class="para-mid"><b>Easy Booking</b> – Reserve your car in just a few clicks with a hassle-free online process.</p>
+                </div>
+                <div class="feature-container flex-col">
+                    <p class="feature-icon"><i class="fa-solid fa-car" style="color: rgb(50, 102, 185);"></i></p>
+                    <p class="para-mid"><b>Wide Selection</b> – Choose from a variety of vehicles to match your needs and style.</p>
+                </div>
+                <div class="feature-container flex-col">
+                    <p class="feature-icon"><i class="fa-brands fa-searchengin" style="color: rgb(226, 176, 84);"></i></p>
+                    <p class="para-mid"><b>Flexible Rentals</b> – Enjoy daily, weekly, or monthly rental options tailored to you.</p>
+                </div>
+                <div class="feature-container flex-col">
+                    <p class="feature-icon"><i class="fa-brands fa-teamspeak" style="color: rgb(126, 55, 146);"></i></p>
+                    <p class="para-mid"><b>24/7 Support</b> – Get assistance anytime, anywhere for a smooth rental experience.</p>
+                </div>
+            </div>
+        </section>
+        <section class="doc-section flex-col flex-center" id="getApp">
+            <div class="features-desc2 flex-col">
+                <h4 class="low-text-sml">Offices locations</h4>
+                <h1 class="blg-txt title-large">Find Us</h1>
+                <p class="para-mid" style="width: 50%;">Do not hesitate to come to one of our offices and take a closer look. Find the center nearest to you and give your opinion.</p>
+            </div>
+            <div class="mapper" id="cordMap"></div>
+        
+            <script src="/lib/node_modules/mapbox-gl/dist/mapbox-gl.js"></script>
+            <script>
+                mapboxgl.accessToken = '<%= process.env.MAPBOX_TOKEN %>';
+        
+                const map = new mapboxgl.Map({
+                    container: 'cordMap',
+                    style: 'mapbox://styles/mapbox/streets-v12',
+                    center: [3.05, 36.75], // default center (you can use your first office)
+                    zoom: 3,
+                    attributionControl: false
+                });
+        
+                <% if (offices && offices.length) { %>
+                    <% offices.forEach((office, index) => { %>
+                        const coords<%= index %> = [<%= office.longitude %>, <%= office.latitude %>];
+                        const customMarkerEl<%= index %> = document.createElement('div');
+                        customMarkerEl<%= index %>.className = 'logo-map-mark';
+        
+                        new mapboxgl.Marker(customMarkerEl<%= index %>)
+                            .setLngLat(coords<%= index %>)
+                            .setPopup(new mapboxgl.Popup().setHTML(`
+                                <h3>DZRentCar</h3>
+                                <p><%= office.wilaya %> Office, <%= office.city %>, <%= office.address %></p>
+                            `))
+                            .addTo(map);
+                    <% }) %>
+                <% } %>
+            
+            </script>
+        </section>        
+        <footer class="doc-footer flex-col flex-center" id="homeFooter">
+            <div class="subscribe flex-row" style="height: 30%; justify-content: space-between;">
+                <p class="para-lrg">Join our newsletter to <br> Keep to date with us!</p>
+                <div class="mailer flex-row flex-center">
+                    <div class="input-holder flex-row" style="width: 20vw;">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="subscribeMail" placeholder="Enter your email" >
+                    </div>
+                    <button class="bt bt-hover account">Subscribe</button>
+                </div>
+            </div>
+            <div class="break-line" style="width: 80%;"></div>
+            <div class="about-company flex-row" style="height: 40%; justify-content: space-between;">
+                <div class="company flex-col">
+                    <div class="flex-col logo">
+                        <img src="assets/logo.png" width="60px" alt="Logo" class="logo" id="navLogoFoot">
+                        <h1 class="title-min">DZ RentCars</h1>
+                    </div>
+                    <p class="para-mid">We make sure you drive your dreams</p>
+                </div>
+                <div class="company-docs flex-row flex-center">
+                    <ul class="c-doc flex-col platform">
+                        <legend class="list-title">Platform</legend>
+                        <li class="bt-hover">Plans & Prices</li>
+                        <li class="bt-hover">Cars Collection</li>
+                        <li class="bt-hover">Our Offices</li>
+                    </ul>
+                    <ul class="c-doc flex-col comp">
+                        <legend class="list-title">Company</legend>
+                        <li class="bt-hover">Blog</li>
+                        <li class="bt-hover">Careers</li>
+                        <li class="bt-hover">News</li>
+                    </ul>
+                    <ul class="c-doc flex-col resources">
+                        <legend class="list-title">Resources</legend>
+                        <li class="bt-hover">Documentation</li>
+                        <li class="bt-hover">Papers</li>
+                        <li class="bt-hover">Press Conferences</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="break-line" style="width: 80%;"></div>
+            <div class="copyrights flex-row" style="justify-content: space-between;">
+                <p class="para-mid copyright">© 2025 DzCarRental Inc.</p>
+                <div class="social-media flex-row flex-center">
+                    <i class="social-icon fa-brands fa-facebook-f" style="color: rgb(76, 114, 179);"></i>
+                    <i class="social-icon fa-brands fa-twitter" style="color: rgb(79, 191, 191);"></i>
+                    <i class="social-icon fa-brands fa-instagram" style="color: rgb(247, 59, 106);"></i>
+                    <i class="social-icon fa-brands fa-linkedin-in" style="color: rgb(54, 126, 126);"></i>
+                </div>
+                <ul class="flex-row policy">
+                    <li class="bt-hover">Terms of service</li>
+                    <li class="bt-hover">Privacy Policy</li>
+                    <li class="bt-hover">Cookies</li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="lib/node_modules/gsap/dist/gsap.min.js"></script>
+    <script src="lib/node_modules/gsap/dist/ScrollTrigger.min.js"></script>
+    <script src="lib/node_modules/gsap/dist/ScrollToPlugin.min.js"></script>
+    <script src="js/homeApp.js"></script>
+</body>
+</html>

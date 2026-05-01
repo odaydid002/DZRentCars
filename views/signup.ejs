@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="../lib/node_modules/intl-tel-input/build/css/intlTelInput.min.css">
+    <link rel="stylesheet" href="../style/checkbox.css">
+    <link rel="stylesheet" href="../style/lib/fontawesome/all.min.css"">
+    <link rel="stylesheet" href="../style/signup.css">
+    <link rel="stylesheet" href="../style/mobile.css">
+    <title>Create</title>
+</head>
+<body class="flex-col flex-center">
+    <img class="map-img" src="../assets/images/map.png" alt="Maps">
+    <main class="doc">
+        <form class="signupForm" id="signupForm" action="/reg" method="post" enctype="multipart/form-data">
+            <div class="form flex-col">
+                <h1 class="formTitle">Create Account</h1>
+                <div class="formBody flex-col flex-center">
+                    <div class="input-container">
+                        <label for="email">Email</label>
+                        <input type="text" id="emailo" disabled class="input-info">
+                        <input type="text" name="email" id="email" hidden class="input-info">
+                    </div>
+                    <div class="input-container">
+                        <label class="label-important" for="username">Username</label>
+                        <input type="text" name="username" id="username" class="input-info" placeholder="Username" required>
+                    </div>
+                    <div class="flex-col input-container" style="position: relative;">
+                        <label class="label-important" for="password">Password</label>
+                        <input type="password" name="password" id="password" class="input-info" placeholder="password" required>
+                        <label id="passEye">
+                            <i class="fa-regular fa-eye"></i>
+                            <i class="fa-regular fa-eye-slash"></i>
+                            <input type="checkbox" hidden id="passHide">
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <label class="label-important" for="rePassword">Repeat Password</label>
+                        <input type="password" name="rePassword" id="rePassword" class="input-info" placeholder="Repeat Password" required>
+                    </div>
+                    <div class="input-container-row2 agree">
+                        <div class="checkbox-wrapper-13">
+                            <input type="checkbox" required name="agreeTerms" id="agreeTerms" class="agreeTerms">
+                        </div>
+                        <label for="agreeTerms">Agree Terms</label>
+                    </div>
+                </div>
+                <button type="submit" class="bt bt-hover" name="Registre" id="Registre">Signup <i class="fa-solid fa-user-plus" style="color: white; margin-left: 5px;"></i></button>
+            </div>
+            <div class="sidel flex-col">
+                <div class="pictureConainer" id="pictureConainer">
+                    <img src="../assets/images/user.jpg" alt="" class="pictChange" id="pictChange">
+                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" hidden>
+                </div>
+                <div class="sidleBody flex-col" id="sidleBody">
+                    <div class="inputHolderTwo">
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label class="label-important" for="Fname">First Name</label>
+                                <input type="text" name="fname" id="Fname" class="input-info" placeholder="First Name" required>
+                            </div>
+                        </div>
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label class="label-important" for="Lname">Last Name</label>
+                                <input type="text" name="lname" id="Lname" class="input-info" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container inpth">
+                        <label for="addr" class="label-important">Addres</label>
+                        <input type="text" name="address" id="addr" class="input-info" placeholder="Adress" required>
+                    </div>
+                    <div class="inputHolderTwo">
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label class="label-important" for="country">Country</label>
+                                <input list="countries" type="text" name="country" id="country" class="input-info" placeholder="Country" required>
+                                <datalist id="countries">
+                                    <option value="Algeria">Algeria</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label for="state" class="label-important">Wilaya</label>
+                                <input list="wilayas" type="text" name="wilaya" id="state" class="input-info" placeholder="State" required>
+                                <datalist id="wilayas">
+                                    <% if (wilaya) wilaya.forEach(w => { %>                                     
+                                        <option value="<%= w.name  %>"><%= w.id  %></option>
+                                    <% }) %>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputHolderTwo">
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label for="city" class="label-important">City</label>
+                                <input list="cities" type="text" name="city" id="city" class="input-info" placeholder="City" required>
+                                <datalist id="cities">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="hold">
+                            <div class="input-container hold1">
+                                <label class="label-important" for="zcode">Zipcode</label>
+                                <input type="text" name="zipcode" id="zcode" class="input-info" placeholder="Zipcode" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-row center-start" style="width: 90%; padding: 5px">
+                        <div class="input-container inpth">
+                            <label for="dateN" class="label-important">Birth Day</label>
+                            <input type="date" name="birthdate" id="birthdate" class="input-info" style="width: 45%;" required>
+                        </div>
+                        <div class="flex-row center-start sxlb">
+                            <input value="M" type="radio" name="sexe" id="sM" checked>
+                            <label for="sM" class="para-mid">Male</label>
+                            <input value="F" type="radio" name="sexe" id="sF">
+                            <label for="sF" class="para-mid">Female</label>
+                        </div>
+                    </div>
+                    <div class="input-container inpth">
+                        <label class="label-important" for="phone">Phone</label>
+                        <div class="phone-number-selector">
+                            <input type="tel" name="phone" class="input-info" placeholder="Enter phone number" id="phone-number-input" name="phone" />
+                            <input hidden name="phone_country_code" id="phone-country-code" />
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </form>
+    </main>
+    <script src="../lib/node_modules/intl-tel-input/build/js/intlTelInput.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/darkmode.js"></script>
+    <script src="../js/signup1.js"></script>
+    <% if (messages.success_msg) { %>
+        <script> pushNotif("s", "<%= messages.success_msg %>") </script>
+    <% } %>
+</body>
+</html>

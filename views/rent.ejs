@@ -1,0 +1,772 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="/style/lib/fontawesome/all.min.css">
+    <link rel="stylesheet" href="/style/main.css">
+    <link rel="stylesheet" href="/style/checkbox.css">
+    <link rel="stylesheet" href="/style/heart-animation.css">
+    <link rel="stylesheet" href="/style/rent.css">
+    <link rel="stylesheet" href="/lib/node_modules/mapbox-gl/dist/mapbox-gl.css">
+    <link rel="stylesheet" href="/lib/node_modules/flatpickr/dist/flatpickr.css">
+    <link rel="stylesheet" href="/style/mobile.css">
+    <link rel="stylesheet" href="/style/lagreScreen.css">
+    <title>Rent - <%= car.brand_name %> <%= car.model %> <%= car.fab_year %></title>
+</head>
+<body class="flex-row">
+
+  <%
+    function formatDate(dateString) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const date = new Date(dateString)
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+      return `${day} ${month} ${year}`;
+    }
+    function formatMoney(amount, decimals = 2) {
+      amount = parseFloat(amount);
+    
+      const fixedAmount = amount.toFixed(decimals);
+    
+      const parts = fixedAmount.split('.');
+      let integerPart = parts[0];
+      const decimalPart = parts[1];
+    
+      integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    
+      return `${integerPart}.${decimalPart}`;
+    }
+  %>
+
+  <input type="number" value="<%= user?user.id:6 %>" id="uid" hidden>
+  <input type="number" value="<%= car.id %>" id="vid" hidden>
+  <input type="number" value="<%= car.price %>" id="rentPrice" hidden>
+
+  <nav class="rent-navigator flex-col">
+      <a href="/home" class="nav-head nav-logo bt-hover flex-row center-start gap-lrg w100">
+        <img src="/assets/logo.png" class="w100" alt="Website logo">
+        <h1>DZRentCars</h1>
+      </a>
+      <div class="nav-body flex-col w100">
+       
+        <ol class="rent-steps flex-col w100" style="margin-top: auto;">
+          <li class="rent-step flex-row center-start">1 - Rental Details <input id="rentStep1" type="radio" name="step" checked hidden></li>
+          <li class="rent-step flex-row center-start">2 - Optional additions <input id="rentStep2" type="radio" name="step" hidden></li>
+          <li class="rent-step flex-row center-start">3 - Coupons and discounts <input id="rentStep3" type="radio" name="step" hidden></li>
+          <li class="rent-step flex-row center-start">4 - Payment & Confirm <input id="rentStep4" type="radio" name="step" hidden></li>
+        </ol>
+        <div class="steppination gap-lrg w100 flex-row flex-center">
+          <button class="bt bt-hover gap-min" id="stepPrev" disabled><i class="fa-solid fa-chevron-left"></i> Previous </button>
+          <button class="bt bt-hover gap-min" id="stepNext">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <a href="/logout" class="bt-hover plat-logout flex-row center-start gap-lrg" title="Logout">
+          <i class="fa-solid fa-person-walking-arrow-right"></i>
+          <p class="nav-label">Logout</p>
+        </a>
+      </div>
+  </nav>
+  <main class="rent-main-doc flex-col">
+
+    <div class="main-header w100 flex-row center-spacebet" style="margin-bottom: 1em;">
+      <div class="flex-row center-start gap-min">
+        <a href="/docs">
+          <div class="plat-user-profile">
+            <img loading="lazy" src="<%= user?user.image:"/assets/images/user.jpg"%>" alt="Use">
+          </div>
+        </a>
+        <div class="flex-col">
+          <p class="name"><%= user?user.fname:"Firstname"%> <%= user?user.lname:"Lastname"%></p>
+          <p class="username">@<%= user?user.username:"Username"%></p>
+        </div>
+      </div>
+      <div class="flex-row center-start gap-min">
+        <div class="today-date flex-row center-start" id="todayDate">
+            <i class="fa-regular fa-clock tm-icn"></i>
+            <p class="user-locate-date">
+                <script>
+                    days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                    mnts = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
+                    today = new Date;
+                    document.write(`
+                    ${days[today.getDay()]}, 
+                    ${today.getDate()} 
+                    ${mnts[today.getMonth()]} 
+                    ${today.getFullYear()}`);
+                </script>
+            </p>
+        </div>
+        <div class="user-locate flex-row center-start" id="userLocate">
+            <i class="fa-solid fa-location-dot tm-icn"></i>
+            <p class="user-locate-date" id="userIp">
+                <script>
+                    navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const { latitude, longitude } = position.coords;
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+                        const data = await response.json();
+                        country = data.address.country
+                        state =  data.address.state
+                        city = data.address.city || data.address.town || data.address.village
+                        document.getElementById("userIp").innerHTML = `${state}, ${city}`
+                    },
+                    (error) => {
+                        console.error("Geolocation error:", error.message);
+                        document.getElementById("userLocate").style.display = "none"
+                    }
+                );
+                </script>
+            </p>
+        </div>
+      </div>
+    </div>
+
+    <section class="rent-step-sect flex-row flex-wrap w100 gap-lrg" id="step1">
+      <input type="radio" name="stepsect" value="s1" checked hidden>
+      <div class="flex-col flex-center gap-lrg pers-rent-info">
+        <h1 class="gap-lrg" style="align-self: flex-start;"><i class="fa-solid fa-clipboard-list"></i> Rental Details</h1>
+        <div class="rentInf flex-row w100 center-start gap-lrg">
+          <div class="flex-col w50 pdv">
+            <div class="pickinfo flex-col">
+                <h3>Pickup Location</h3>
+                  <div class="flex-row holder" style="position: relative;">
+                      <i class="fa-solid fa-location-dot float-icon"></i>
+                      <select class="para-sml plat-text" id="pickLoc">
+                          <option value="<%= car.wilaya %>, <%= car.city %>, <%= car.address %>"><%= car.wilaya %>, <%= car.city %>, <%= car.address %></option>
+                      </select>
+                  </div>
+            </div>
+            <div class="pickinfo flex-col">
+              <h3>Pickup Date</h3>
+              <div class="flex-row center-start holder">
+                <input id="pickupInput" type="<%= car.rental_type === 'h' ? 'time' : 'date' %>" data-rental-type="<%= car.rental_type %>" style="position: absolute; left:0;z-index:-1;">
+                <p class="para-mid" id="pickupText">Sat 4 Apr 2025, 21:00</p>
+                <i class="fa-regular fa-calendar bt-hover" id="pickupIcon"></i>
+              </div>
+            </div>
+            <div class="pickinfo flex-col">
+              <h3>Return Date</h3>
+              <div class="flex-row center-start holder">
+                <input id="returnInput" type="<%= car.rental_type === 'h' ? 'time' : 'date' %>" style="position: absolute; left:0;z-index:-1;">
+                <p class="para-mid" id="returnText">Sat 4 Apr 2025, 21:00</p>
+                <i class="fa-regular fa-calendar bt-hover" id="returnIcon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="rent-car-container flex-col w50">
+          <a href="/car/<%= car.id%>" target="_blank" rel="noopener noreferrer">
+            <img width="280" src="<%= car.image %>" alt="picanto">
+          </a>
+          <div class="flex-col gap-min">
+            <div class="flex-row center-spacebet opl">
+              <p><i class="fa-solid fa-car"></i> <%= car.body %></p>
+              <p><i class="fa-solid fa-retweet"></i> <%= car.transmission %></p>
+              <p><i class="fa-solid fa-gas-pump"></i> <%= car.fuel %></p>
+            </div>
+            <div class="rcc-foot flex-row center-spacebet">
+                <div class="flex-row center-start gap-min">
+                  <img src="<%= car.logo%>" width="30" alt="<%= car.brand_name %> Logo">
+                  <p id="carName"><%= car.brand_name %> <%= car.model %> <%= car.fab_year %></p>
+                </div>  
+                <input type="number" value="<%= car.price %>" id="rentalPrice" hidden>
+                <p class="price"> <%= formatMoney(car.price) %> <span class="currence">DZD/<%= car.rental_type %></span></p>
+            </div>
+            <div class="check-stat flex-row center-spacebet gap-lrg">
+              <div class="flex-row center-start gap-min">
+                <button class="bt bt-hover bt-solid" id="checkCarAv" style="height: 2.5em;">Check availability</button>
+                 <div class="sloader" id="avLoader"></div>
+              </div>
+              <div class="avai avd flex-row center-start gap-min">
+                <div class="av-dot avd"></div>
+                <p class="av-txt avd">Available</p>
+              </div>
+            </div>
+          </div>
+        </div>  
+        </div>
+        <h1 class="gap-lrg" style="align-self: flex-start;"><i class="fa-solid fa-address-card"></i> Personal Informations</h1>
+        <div class="persInf w100">
+          <div class="flex-row center-spacebet gap-lrg">
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Full name</label>
+              <input id="userFLName" type="text" value="<%= user?user.fname:"Firstname"%> <%= user?user.lname:"Lastname"%>" disabled>
+            </div>
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Birthdate</label>
+              <input id="userBirth" type="text" value="<%= user?formatDate(user.birthdate):"YYYY-MM-DD"%>" disabled>
+            </div>
+          </div>
+          <div class="flex-row center-spacebet gap-lrg">
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">E-mail</label>
+              <input id="userEmail"  type="text" value="<%= user?user.email:"Exemple@gmail.com"%>" disabled>
+            </div>
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Phone number</label>
+              <input id="userPhone"  type="text" value="<%= user?user.phone:"+213xxxxxxx"%>" disabled>
+            </div>
+          </div>
+          <div class="flex-row center-spacebet gap-lrg">
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Country</label>
+              <input id="userCountry"  type="text" value="<%= user?user.country:"Algeria"%>" disabled>
+            </div>
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Wilaya</label>
+              <input id="userWilaya" type="text" value="<%= user?user.wilaya:"Wilaya"%>" disabled>
+            </div>
+          </div>
+          <div class="flex-row center-spacebet gap-lrg">
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">City</label>
+              <input id="userCity" type="text" value="<%= user?user.city:"City"%>" disabled>
+            </div>
+            <div class="flex-row center-spacebet w50 pdv">
+              <label for="">Address</label>
+              <input id="userAddress" type="text" value="<%= user?user.address:"Address"%>" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-col gap-lrg" style="flex-grow:1;">
+        <div class="flex-col rent-driver">
+          <h1 class="gap-min" style="margin-bottom: 0.325em;"><i class="fa-solid fa-user-plus"></i> Driver</h1>
+          <div class="flex-row flex-center gap-lrg h100">
+            <div class="flex-col">
+              <label class="image-button bt-hover">
+                <input type="radio" name="driveron" value="driver" class="posabs topright radio-fk" checked>
+                <img src="/assets/images/driver.png" alt="Image Button" width="100">
+              </label>
+              <h2 class="para-sml" style="text-align: center;">With Driver</h2>
+            </div>
+            <div class="flex-col">
+              <label class="image-button bt-hover <%=user?user.account_status?"":"bt-disable":"bt-disable" %>" title="<%=user?user.account_status?"":"Your Account is not verified":"Your Account is not verified" %>">
+                <input type="radio" name="driveron" value="nodriver" class="posabs topright radio-fk" <%=user?user.account_status?"":"disabled":"disabled" %>>
+                <img src="/assets/images/nodriver.png" alt="Image Button" width="100">
+              </label>
+              <h2 class="para-sml" style="text-align: center;">Without Driver</h2>
+            </div>
+          </div>
+        </div>
+        <div class="flex-col loc-map">
+            <h1 class="gap-min" style="margin-bottom: 0.325em;"><i class="fa-solid fa-globe"></i> Location</h1>
+            <div class="cord-map" id="cordMap"></div>
+            <script src="/lib/node_modules/mapbox-gl/dist/mapbox-gl.js"></script>
+            <script>
+                mapboxgl.accessToken = '<%= process.env.MAPBOX_TOKEN%>'; 
+                const coords = ['<%= car.longitude %>','<%= car.latitude %>'];
+                const map = new mapboxgl.Map({
+                    container: 'cordMap',
+                    style: 'mapbox://styles/mapbox/streets-v12',
+                    center: coords,
+                    attributionControl: false,
+                    zoom: 12
+                });
+                const customMarkerEl = document.createElement('div');
+                customMarkerEl.className = 'logo-map-mark';
+                new mapboxgl.Marker(customMarkerEl)
+                .setLngLat(coords)
+                .setPopup(new mapboxgl.Popup().setHTML('<h3>DZRentCar</h3><p>The car is available at this office..</p>'))
+                .addTo(map);
+                navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    map.on('load', () => {
+                        const start = [longitude, latitude];
+                        const end = [<%= car.longitude %>, <%= car.latitude %>]; 
+                      
+                        fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${start.join(',')};${end.join(',')}?geometries=geojson&access_token=<%= process.env.MAPBOX_TOKEN %>`)
+                          .then(response => response.json())
+                          .then(data => {
+                            const route = data.routes[0].geometry;
+                      
+                            map.addSource('route', {
+                              type: 'geojson',
+                              data: {
+                                type: 'Feature',
+                                properties: {},
+                                geometry: route
+                              }
+                            });
+                      
+                            map.addLayer({
+                              id: 'route-line',
+                              type: 'line',
+                              source: 'route',
+                              layout: {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                              },
+                              paint: {
+                                'line-color': 'red',
+                                'line-width': 3
+                              }
+                            });
+                      
+                            new mapboxgl.Marker().setLngLat(start).addTo(map);
+                      
+                            map.fitBounds([start, end], {
+                              padding: 50
+                            });
+                          });
+                      });
+                },
+                (error) => {
+                    console.error("Geolocation error:", error.message);
+                    document.getElementById("userLocate").style.display = "none"
+                })                             
+            </script>
+            <style>
+              .logo-map-mark {
+                background-image: url('<%= car.image %>') !important;
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 8em;
+                height: 8em;
+              }
+            </style>
+        </div>
+      </div>
+    </section>
+
+    <section class="rent-step-sect flex-row flex-wrap w100 gap-lrg" id="step2">
+      <input type="radio" name="stepsect" value="s2" hidden>
+      <div class="flex-col gap-lrg h100">
+        <div class="rent-insur flex-col">
+          <div class="gap-min flex-row center-start">
+            <i class="fa-solid fa-circle-dollar-to-slot para-sml" style="opacity: 0.8;"></i> 
+            <h1>Insurance</h1>
+          </div>
+          <div class="insur-container flex-row flex-wrap gap-lrg">
+            <div class="insure-card">
+              <input type="number" value="0" hidden>
+              <div class="card-head flex-col w100">
+                <h2>Basic <span class="para-sml">(Free - No Insurance)</span></h2>
+                <h3>0.00 <span class="currence" style="font-size: var(--font-med);">DZD</span></h3>
+              </div>
+              <div class="card-body flex-col w100">
+                <ul class="insurs flex-col flex-center gap-min w100">
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    <p>No coverage for damages or theft</p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    <p>Renter is liable for all repair costs</p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    <p>No roadside assistance</p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                    <p>No medical coverage</p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>24/7 customer support for rental issues only</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-foot flex-row flex-center w100">
+                <label class="flex-row flex-center bt-hover">
+                  Choose Plan
+                  <input type="radio" name="insure" hidden>
+                </label>
+              </div>
+            </div>
+            <div class="insure-card">
+              <input type="number" value="<%= car.price * 10 / 100 %>" hidden>
+              <div class="card-head flex-col w100">
+                <h2>Stand Protection <span class="username">(Recommended)</span></h2>
+                <h3><%= formatMoney(car.price * 10 / 100) %> <span class="currence" style="font-size: var(--font-med);">DZD/<%= car.rental_type %></span></h3>
+              </div>
+              <div class="card-body flex-col w100">
+                <ul class="insurs flex-col flex-center gap-min w100">
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Partial Damage Waiver <span class="para-smlr">(up to 50,000.00 DZD)</span></p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Theft Protection <span class="para-smlr">(up to 1,200,000.00 DZD)</span></p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Full Roadside Assistance <span class="para-smlr">(towing, battery jump, lockout)</span></p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Third-Party Liability <span class="para-smlr">(up to 2,600,000.00 DZD)</span></p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Comprehensive Medical Coverage <span class="para-smlr">(driver + passengers)</span></p>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-foot flex-row flex-center w100">
+                <label class="flex-row flex-center bt-hover">
+                  Choose Plan
+                  <input type="radio" name="insure" checked hidden>
+                </label>
+              </div>
+            </div>
+            <div class="insure-card">
+              <input type="number" value="<%= car.price * 10 / 100 %>" hidden>
+              <div class="card-head flex-col w100">
+                <h2>Premium Protection</h2>
+                <h3><%= formatMoney(car.price * 30 / 100) %> <span class="currence" style="font-size: var(--font-med);">DZD/<%= car.rental_type %></span></h3>
+              </div>
+              <div class="card-body flex-col w100">
+                <ul class="insurs flex-col flex-center gap-min w100">
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Full Damage Waiver <span class="para-smlr">(no out-of-pocket repair costs)</span></p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Full Theft Protection <span class="para-smlr">(up to full vehicle value)</span> </p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Full Roadside Assistance <span class="para-smlr">(towing, battery jump, lockout)</span> </p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Third-Party Liability <span class="para-smlr">(up to 2,600,000.00 DZD)</span> </p>
+                  </li>
+                  <li class="flex-row center-start w100 gap-min">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <p>Comprehensive Medical Coverage <span class="para-smlr">(driver + passengers)</span> </p>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-foot flex-row flex-center w100">
+                <label class="flex-row flex-center bt-hover">
+                  Choose Plan
+                  <input type="radio" name="insure" hidden>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rent-feat flex-col">
+        <div class="flex-col h100">
+          <div class="flex-row w100 center-start gap-min">
+            <i class="fa-solid fa-puzzle-piece para-sml" style="opacity: 0.8;"></i>
+            <h1>Features</h1>
+          </div>
+          <ul class="features-list w100 h100 flex-col flex-center gap-lrg">
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="600" hidden>
+              <p class="feature-price">600 <span class="currence">DZD</span></p>
+              <img src="/assets/features/babyseat.png" alt="Feature" class="feat-icn">
+              <div class="flex-row center-start">
+                <div class="flex-col">
+                  <h6>Baby Seat</h6>
+                  <p>For infants or young children</p>
+                </div>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="900" hidden>
+              <p class="feature-price">900 <span class="currence">DZD</span></p>
+              <img src="/assets/features/lugg.png" alt="Feature" class="feat-icn">
+              <div class="flex-col">
+                <h6>Extra Luggage Space</h6>
+                <p>Ideal for trips with lots of baggage</p>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="800" hidden>
+              <p class="feature-price">800 <span class="currence">DZD</span></p>
+              <img src="/assets/features/gps.png" alt="Feature" class="feat-icn">
+              <div class="flex-col">
+                <h6>GPS Navigation System</h6>
+                <p>Helps avoid roaming charges on phones</p>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="1000" hidden>
+              <p class="feature-price">1,000 <span class="currence">DZD</span></p>
+              <img src="/assets/features/hotspot.png" alt="Feature" class="feat-icn">
+              <div class="flex-col">
+                <h6>Wi-Fi Hotspot</h6>
+                <p>Mobile internet access for passengers</p>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="2000" hidden>
+              <p class="feature-price">2,000 <span class="currence">DZD</span></p>
+              <img src="/assets/features/clean.png" alt="Feature" class="feat-icn">
+              <div class="flex-col">
+                <h6>Cleaning Package</h6>
+                <p>Includes interior vacuum & exterior wash</p>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+            <label class="flex-row center-start gap-min feat checkbox-wrapper-13">
+              <input type="number" value="1200" hidden>
+              <p class="feature-price">1,200 <span class="currence">DZD</span></p>
+              <img src="/assets/features/roof.png" alt="Feature" class="feat-icn">
+              <div class="flex-col">
+                <h6>Roof Rack / Bike Rack</h6>
+                <p>For carrying extra luggage, bikes, or outdoor gear</p>
+              </div>
+              <div class="checkb">
+                <input type="checkbox" name="features">
+              </div>
+            </label>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="rent-step-sect flex-row flex-wrap gap-lrg w100" id="step3">
+      <input type="radio" name="stepsect" value="s3" hidden>
+      <div class="flex-col gap-lrg h100" style="width: calc(70% - 1em);">
+        <div class="apply-coup flex-col flex-center">
+          <div class="flex-row center-start gap-min" style="align-self: flex-start;">
+            <i class="fa-solid fa-ticket para-sml" style="opacity: 0.8;"></i>
+            <h1>Promo code</h1>
+          </div>
+          <div class="flex-col flex-center h100" style="width: 80%;">
+            <img src="/assets/images/promo.png" width="120" alt="Promo">
+            <p class="para-sml" style="align-self: flex-start;">Make sure you enter a valid promo code</p> 
+            <div class="flex-row flex-center gap-lrg w100" style="margin-top: 1em;">
+              <input type="text" id="promoCode" placeholder="Code here...">
+              <button class="bt bt-hover" id="applyPromo">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="my-coups flex-col">
+          <div class="flex-row center-start gap-min">
+            <i class="fa-solid fa-clipboard-list para-sml" style="opacity: 0.8;"></i>
+            <h1>Coupons</h1>
+          </div>
+          <div class="coupon-container h100 flex-row flex-center flex-wrap w100" id="couponsContainer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="flex-col discounts gap-lrg">
+        <div class="flex-row center-start gap-min" style="height: 2em;">
+          <i class="fa-solid fa-percent para-sml" style="opacity: 0.8;"></i>
+          <h1>Discounts</h1>
+        </div>
+        <ul class="discounts-list flex-col center-start w100">
+          <% if (discounts) discounts.forEach(discount => {%>
+            <li class="discount-el flex-row center-start w100 gap-lrg">
+            <input type="number" value="<%= discount.value %>" hidden>
+            <i class="fa-solid fa-gift"></i>
+            <div class="flex-col">
+              <h6><%= discount.name %></h6>
+              <p><%= discount.description %></p>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+
+    <section class="rent-step-sect flex-row flex-wrap gap-lrg w100" id="step4">
+      <input type="radio" name="stepsect" value="s4" hidden>
+      <div class="rent-invoice flex-col" id="rentInvoice">
+        <div class="flex-row center-start gap-min">
+          <i class="fa-solid fa-file-invoice"></i>
+          <h1>Invoice</h1>
+        </div>
+        <div class="invoice flex-col w100">
+          <div class="flex-col bill-head w100">
+            <h2>Bill Informations</h2>
+            <p class="currence plat-text">#<%= rent_id %></p>
+            <input id="billUUID" type="text" value="<%= rent_id %>" hidden>
+          </div>
+          <div class="flex-col w100 bill-body">
+            <div class="flex-row w100 gap-lrg">
+              <div class="flex-col w50">
+                <span class="username">Tenant</span>
+                <ul class="bill-inf" id="tentantInfo">
+                  <li><span id="invUfname"><%= user?user.fname:"Firstname"%></span> <span id="invUlname"><%= user?user.lname:"Lastname"%></span></li>
+                  <li class="address">Address:  <span id="invUwilaya"><%= user?user.wilaya:"Wilaya"%></span>, <span id="invUcity"><%= user?user.city:"City"%></span>, <span id="invUaddress"><%= user?user.address:"Address"%></span></li>
+                  <li class="address">Email: <span id="invUemail"><%= user?user.email:"Exemple@exemple.exe"%></span></li>
+                  <li class="address">Phone: <span id="invUphone"><%= user?user.phone:"+213xxxxxxxxx"%></span></li>
+                </ul>
+              </div>
+              <div class="flex-col w50">
+                <span class="username">Rental</span>
+                <ul class="bill-inf" id="rentalInfo">
+                  <li><%= car.brand_name %> <%= car.model %> <%= car.fab_year %></li>
+                  <li id="invRloca" class="address">Location: <%= car.wilaya %>, <%= car.city %>, <%= car.address %></li>
+                  <li id="invRpickup" class="address">Pickup: 24 Mar 2025 08:00 AM</li>
+                  <li id="invRreturn" class="address">Return: 24 Apr 2025 17:00 PM</li>
+                </ul>
+              </div>
+            </div>
+            <span class="username" style="margin: 1em 0;">Invoice Details</span>
+            <div class="bill-details flex-col w100">
+              <div class="bill-sip"></div>
+              <div class="bill-head-row bill-row">
+                <p>Car</p>
+                <p>Units</p>
+                <p>Period</p>
+                <p>Price</p>
+              </div>
+              <div class="bill bod-list flex-col">
+                <div class="bill-row bill-det">
+                  <div class="flex-row center-start gap-lrg">
+                    <img src="<%= car.image %>" alt="Car">
+                    <p><%= car.brand_name %> <%= car.model %> <%= car.fab_year %></p>
+                  </div>
+                  <p>1</p>
+                  <p id="rentPeriod">1 Days</p>
+                  <p><span id="carRentPrice">10,000.00</span> <span class="currence">DZD/<%= car.rental_type %></span></p>
+                </div>
+              </div>
+              <div class="flex-col" id="invoiceBillOpt">
+                <div class="bill-sip"></div>
+                <span class="username" style="margin: 1em 0;">Optional Additions</span>
+                <div class="bill-head-row bill-row">
+                  <p>Description</p>
+                  <p>Quantity</p>
+                  <p>Price</p>
+                  <p>Amount</p>
+                </div>
+                <div class="bill bod-list flex-col">
+                  <div class="bill-row bill-det">
+                    <p>Baby seat</p>
+                    <p>10</p>
+                    <p><span>1,000.00</span> <span class="currence">DZD</span></p>
+                    <p><span>10,000.00</span> <span class="currence">DZD</span></p>
+                  </div>
+                  <div class="bill-row bill-det">
+                    <p>Wifi</p>
+                    <p>1</p>
+                    <p><span>1,000.00</span> <span class="currence">DZD</span></p>
+                    <p><span>1,000.00</span> <span class="currence">DZD</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="bill-sip"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-row center-spacebet bill-total">
+          <p>Total amount</p>
+          <div class="flex-row center-start gap-min">
+            <p><span id="totalBillAmount">250,000.00</span> <span class="currence">DZD</span></p>
+          </div>
+        </div>
+        <div class="flex-col w100" id="billDiscounts">
+          <div class="flex-row center-spacebet bill-discount">
+            <p></p>
+            <p class="username">-10% Summer discounts</p>
+          </div>
+          <div class="flex-row center-spacebet bill-discount">
+            <p></p>
+            <p class="username">-5% newbie</p>
+          </div>
+          <div class="flex-row center-spacebet">
+            <p></p>
+            <p><span id="totalBillAmountDis">200,000.00</span> <span class="currence">DZD</span></p>
+          </div>
+        </div>
+        <div class="flex-row end-center w100" style="margin-top: auto;">
+          <button class="bt-hover" id="confirmBut">Confirm</button>
+        </div>
+      </div>
+      <div class="flex-col gap-lrg rent-payment">
+        <div class="rent-pay-meth">
+          <div class="flex-row center-start gap-min">
+            <i class="fa-solid fa-cash-register"></i>
+            <h1>Payment methode</h1>
+          </div>
+          <div class="flex-row flex-center gap-lrg h100">
+            <div class="flex-col">
+              <label class="image-button bt-hover">
+                <input type="radio" name="methode" value="1" class="posabs topright radio-fk" checked>
+                <img src="/assets/images/online.png" alt="Image Button" width="100">
+              </label>
+              <h2 class="para-sml" style="text-align: center;">Online</h2>
+            </div>
+            <div class="flex-col">
+              <label class="image-button bt-hover">
+                <input type="radio" name="methode" value="2" class="posabs topright radio-fk">
+                <img src="/assets/images/deliver.png" alt="Image Button" width="100">
+              </label>
+              <h2 class="para-sml" style="text-align: center;">On Deliver</h2>
+            </div>
+            <div class="flex-col">
+              <label class="image-button bt-hover">
+                <input type="radio" name="methode" value="3" class="posabs topright radio-fk">
+                <img src="/assets/images/office.png" alt="Image Button" width="100">
+              </label>
+              <h2 class="para-sml" style="text-align: center;">At Office</h2>
+            </div>
+          </div>
+        </div>
+        <div class="rent-my-meth">
+          <div class="flex-row center-start gap-min">
+            <i class="fa-solid fa-credit-card"></i>
+            <h1>My cards</h1>
+          </div>
+          <ul class="paycards-container w100 flex-col">
+            <label class="paycard flex-row center-start w100 gap-lrg">
+              <input type="radio" class="radio-fk" name="paycard">
+              <img width="48" src="/assets/images/dahabia.png" alt="Dahabia">
+              <div class="flex-col">
+                <h6>Dahabia ending in 8840</h6>
+                <p>Exp date: 05/25</p>
+              </div>
+            </label>
+            <label class="paycard flex-row center-start w100 gap-lrg">
+              <input type="radio" class="radio-fk" name="paycard">
+              <img width="48" src="/assets/images/cib.png" alt="Dahabia">
+              <div class="flex-col">
+                <h6>CIB ending in 6680</h6>
+                <p>Exp date: 09/25</p>
+              </div>
+            </label>
+            <button class="add-paycard bt bt-hover">
+              <i class="fa-solid fa-plus" style="color: var(--color-seconde);"></i>
+              Add new payment methode
+            </button>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/darkmode.js"></script>
+  <script src="/lib/node_modules/gsap/dist/gsap.min.js"></script>
+  <script src="/lib/node_modules/gsap/dist/ScrollTrigger.min.js"></script>
+  <script src="/lib/node_modules/flatpickr/dist/flatpickr.js"></script>
+  <script src="/js/rent.js"></script>
+</body>
+</html>

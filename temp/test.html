@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Therapist Stepper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #ffffff;
+      padding: 20px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar li.active {
+      font-weight: bold;
+      border-left: 4px solid #4CAF50;
+      background: #f0fff0;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      background: #fbfdfc;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .therapist {
+      border: 2px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .therapist:hover {
+      border-color: #4CAF50;
+    }
+
+    .therapist.selected {
+      border-color: #4CAF50;
+      background-color: #eaffea;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #3c9a44;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <ul>
+      <li>1. Counseling Type</li>
+      <li class="active">2. Select Therapist</li>
+      <li>3. Schedule Appointment</li>
+      <li>4. Personal Details</li>
+      <li>5. Session Focus</li>
+      <li>6. Review & Confirm</li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h2>Select Therapist</h2>
+    <div class="therapist" onclick="selectTherapist(this)">
+      <strong>Mark Anthony</strong><br>
+      <small>Psychotherapist</small><br>
+      <p>Supporting individuals in navigating emotional challenges and fostering mental clarity, resilience, and well-being.</p>
+    </div>
+
+    <div class="therapist" onclick="selectTherapist(this)">
+      <strong>Jessica Reynolds</strong><br>
+      <small>Cognitive Behavior Therapist</small><br>
+      <p>Helping individuals reshape negative thought patterns to achieve a balanced and positive mindset.</p>
+    </div>
+
+    <div class="therapist" onclick="selectTherapist(this)">
+      <strong>Dr. James Mitchell</strong><br>
+      <small>Psychotherapist</small><br>
+      <p>Dedicated to helping you manage stress and find inner peace.</p>
+    </div>
+
+    <div class="buttons">
+      <button onclick="goBack()">Back</button>
+      <button onclick="goNext()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    function selectTherapist(element) {
+      const all = document.querySelectorAll('.therapist');
+      all.forEach(t => t.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function goBack() {
+      alert('Going back to Step 1...');
+    }
+
+    function goNext() {
+      const selected = document.querySelector('.therapist.selected');
+      if (selected) {
+        alert('Therapist selected: ' + selected.querySelector('strong').innerText + '\nProceeding to Step 3...');
+      } else {
+        alert('Please select a therapist first!');
+      }
+    }
+  </script>
+
+</body>
+</html>

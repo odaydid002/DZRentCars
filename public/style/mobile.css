@@ -1,0 +1,1180 @@
+@media only screen and (max-width: 820px) {
+
+    :root{
+        --ord-filter-s: 91vw;
+    }
+
+    ::-webkit-scrollbar:vertical {
+        width: 0;
+        height: 0;
+    }
+
+    body{
+        height: 100svh;
+        width: 100svw;
+        overflow: hidden;
+    }
+
+    .pagination{
+        bottom: 5em;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .only-pc{
+        display: none !important;
+    }
+    
+    .only-mobile{
+        display: flex;
+    }
+
+    .notifications-container{
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+    }
+
+    .phd{
+        display: none;
+    }
+
+    .mhd{
+        display: flex;
+    }
+
+    .phbb{
+        font-weight: bolder;
+    }
+
+    .input-holder{
+        padding-left: 5px;
+    }
+
+    .input-holder > input{
+        padding: 8px 5px;
+        margin-left: 5px;
+    }
+
+    .preview-image img{
+        width: 100%;
+    }
+    
+
+    /*            login               */
+    .login-container{
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .toggle-container{
+        display: none;
+    }
+
+    .sign-in,
+    .sign-up{
+        width: 100%;
+    }
+
+    .login-container.active .sign-in {
+        transform: translateX(0);
+    }
+
+    #dhaa,
+    #dhai{
+        display: flex;
+    }
+
+    .icon,
+    .fa-google-plus-g,
+    .fa-facebook-f,
+    .fa-linkedin-in{
+        color: white !important;
+    }
+
+    #sicnG,
+    #lIcnG{
+        background-color: rgb(206, 57, 57);
+        border: none;
+    }
+
+    #sicnF,
+    #lIcnF{
+        background-color: rgb(41, 115, 199);
+        border: none;
+    }
+
+    #sicnL,
+    #lIcnL{
+        background-color: rgb(27, 134, 148);
+        border: none;
+    }
+
+    /*            signup        */
+
+    .doc{
+        justify-content: flex-start;
+    }
+    
+    .signupForm{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-y: auto;
+        width: 100%;
+        height: 100%;
+        min-width: 100svw;
+        padding: 0;
+        min-height: 100svh;
+    }
+
+    .sidel,
+    .form{
+        width: 100%;
+        height: fit-content;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+    }
+
+    .formBody,
+    .formHead,
+    .formFoor{
+        width: 100%;
+        height: fit-content;
+    }
+
+    .formTitle{
+        display: none;
+    }
+
+    /*--------------------------*/
+
+    
+    /*        dashboard         */
+
+    .dashboard-menu{
+        display: flex;
+        overflow: hidden;
+    }
+    .boxe {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    #chartContainer {
+        width: 1100px;  
+        height: 2400px; 
+    }
+    
+    #myChart {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    @media (max-width: 768px) {
+
+        .content-section{
+            width: 100vw;
+            padding: 1em;
+        }
+    
+        thead {
+            display: none;
+        }
+    
+        tr {
+            display: block;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            background: white;
+            padding: 10px;
+        }
+    
+        td {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #444;
+        }
+    
+        td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            color: #00f7ff;
+        }
+    }
+    /*---------------------*/
+
+    /*----------------------Home-----------------------------*/
+
+    .doc-section{
+        width: 100%;
+        padding: 20px;
+        min-width: unset;
+        min-height: 100%;
+    }
+
+    .home-banner{
+        min-height: 8em;
+    }
+
+    .main-navigator{
+        position: fixed;
+        height: 100svh;
+        flex-direction: column;
+        width: 130px;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: var(--container);
+        padding: 10vh 0;
+        border-radius: 0 10px 10px 0;
+        transition: all ease 0.6s;
+        left: -130px;
+    }
+
+    .fav-cars{
+        height: calc(100vh - 4.5em);
+    }
+
+    .map-img{
+        width: 70vh;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+
+    .nav-elements,
+    .nav-links,
+    .logo{
+        flex-direction: column;
+        justify-content: flex-start;
+        height: fit-content;
+        padding: 0;
+    }
+
+    #account{
+        margin: 0;
+        margin-top: 20px;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .nav-elements{
+        width: 100%;
+        margin-top: 10vh;
+    }
+
+    .nav-element{
+        padding: 10px 0;
+        margin: 5px 0;
+        width: 100%;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #homeNavClose,
+    #homeNavIcon{
+        display: inline;
+    }
+
+    .pop-cars-container{
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 0.5em;
+    }
+
+    .mini4p{
+        font-size: 0.6rem !important;
+    }
+
+    .mini4pL{
+        font-size: 0.75rem !important;
+    }
+
+    .pop-car-name .title{
+        font-size: 0.8rem;
+    }    
+
+    .graph-body{
+        height: fit-content;
+    }
+
+    .cars-logo{
+        width: 100%;
+        padding: 0;
+        overflow-y: hidden;
+    }
+    .car-logo{
+        border-radius: 10px;
+        min-width: 60px;
+        height: 60px;
+        margin: 0 1.5vw;
+    }
+
+    .car-svg{
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #appSection{
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .phones-container,
+    .app-desc,
+    .desc,
+    .cars-desc{
+        width: 100%;
+    }
+
+    .desc .para-mid{
+        margin: 10px 0 !important;
+    }
+
+    .desc .flex-row{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .frame1{
+        left: 70%;
+        top: 70%;
+    }
+
+    .frame2{
+        left: 80%;
+        top: 100%;
+    }
+
+    #carsSection{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cars-desc p{
+        width: 100% !important;
+        max-width: unset;
+        text-align: left;
+    }
+
+    .cars-types{
+        overflow-x: scroll;
+        padding: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .cars-line{
+        margin: 10px 0;
+    }
+
+    .car-type{
+        padding: 5px 10px;
+        width: fit-content;
+        text-wrap: nowrap;
+        margin: 0 5px;
+    }
+
+    .car-images-container{
+        width: 100%;
+        height: fit-content;
+    }
+    .type-image{
+        width: 30%;
+        height: auto;
+        margin: 5px;
+    }
+    
+    .type-image-s{
+        width: 23%;
+        height: auto;
+        margin: 2px 10px;
+    }
+
+    .type-image img,
+    .type-image-s img{
+        border-radius: 5px;
+    }
+
+    .car-name,
+    .car-price{
+        display: none;
+    }
+
+    #featuresSection{
+        align-items: center;
+        justify-content: space-around;
+        height: fit-content;
+    }
+
+    #getApp{
+        height: 50vh;
+        padding: 0 1rem;
+    }
+
+    .mapper{
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .features-desc,
+    .features-desc2,
+    .features{
+        width: 100%;
+    }
+
+    .features-desc p,
+    .features-desc2 p{
+        width: 100% !important;
+        padding: 0;
+        margin: 5px 0;
+    }
+
+    .features{
+        flex-direction: column;
+    }
+
+    .feature-container{
+        width: 200px;
+        height: 150px;
+        margin: 10px 0;
+        justify-content: center;
+        padding: 10px 20px;
+    }
+
+    .feature-icon{
+        border: none;
+        font-size: calc(var(--font-lrg) + 8px);
+        background-color: transparent;
+    }
+
+    .feature-icon::after,
+    .feature-icon::before,
+    .company,
+    .policy{
+        display: none;
+    }
+
+    #homeFooter{
+        position: sticky;
+        height: fit-content;
+        background-color: var(--container);
+        z-index: 4;
+        padding: 20px 0;
+    }
+
+    .subscribe,
+    .mailer,
+    .about-company{
+        flex-direction: column;
+        height: fit-content !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mailer > .input-holder{
+        width: 100% !important;
+        margin: 10px 0;
+    }
+
+    .company-docs{
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    /*-------------------------------------------------------*/
+
+    /*---------------------Platform---------------------------*/
+
+    .review-container{
+        min-width: 70vw;
+    }
+
+    #carDetail,
+    #homeDoc{
+        height: calc(100svh - 3.5em);
+        padding-top: 0;
+    }
+
+    .plat-main-doc{
+        width: 100vw;
+        height: 100svh;
+        overflow: hidden;
+    }
+
+    .plat-logo,
+    .plat-logout,
+    .plat-user-info{
+        display: none;
+    }
+
+    .plat-main-navigator{
+        position: fixed;
+        z-index: 90;
+        flex-direction: row;
+        padding: 0;
+        width: 100vw;
+        height: 4.5em;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border: none;
+        border-top: 3px solid var(--border-low);
+        min-width: 300px;
+        background-color: var(--container);
+    }
+
+    .plat-navigator{
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0.625rem;
+    }
+
+    .plat-nav-element{
+        border: none;
+    }
+
+    .plat-nav-element::after,
+    #navRecent{
+        display: none;
+    }
+
+    .plat-nav-element{
+        font-size: 1.6em;
+        color: var(--text);
+        width: 3em;
+        margin: 0;
+    }
+
+    .plat-nav-selected{
+        color: var(--color-main);
+    }
+
+    .plat-nav-selected::before{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        content:"";
+        border-radius: 25px;
+        width: 50px;
+        aspect-ratio: 1;
+        height: 50px;
+        background-color: var(--color-main);
+        opacity: 0.1;
+        border: 5px solid var(--border);
+    }
+
+    .plat-profile{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.5em;
+        width: 1.5em;
+        height: 1.5em;
+        min-height: 1.5em;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .plat-profile img{
+        width: 1.5em;
+        height: 1.5em;
+        object-fit: cover;
+    }
+
+    .plat-filter-head{
+        display: none;
+    }
+
+    .plat-filter-sec{
+        position: absolute;
+        width: 100vw;
+        height: 100svh;
+        top: 150%;
+        left: 50%;
+        z-index: 999 !important;
+        transform: translate(-50%, -50%);
+        display: none;
+        transition: ease 0.6s;
+        max-width: unset;
+        min-width: unset;
+    }
+    
+    .plat-filter-foot{
+        display: flex;
+        height: 6em;
+        border-top: 2px solid var(--border-low);
+        width: 100%;
+    }
+
+    .apply-filter{
+        color: white;
+        background-color: var(--color-second);
+        width: 80%;
+        height: 60%;
+        font-size: var(--font-med);
+        border-radius: 1.25rem;
+    }
+
+    .plat-filter-body > .break-line{
+        background-color: transparent;
+    }
+
+    .filter-close-mob{
+        position: sticky;
+        top: -25px;
+        display: flex;
+        z-index: 10;
+        margin-bottom: 20px;
+        padding-bottom: 0.625rem;
+        padding-top: 5px;
+        background-color: var(--container);
+        border-bottom: 2px dashed var(--border);
+
+    }
+
+    .plat-cars-sec{
+        width: 100%;
+        height: calc(100% - 4.5em);
+        overflow: visible;
+        z-index: 99;
+    }
+
+    .carsec-body{
+        width: 100%;
+        min-width: unset;
+    }
+
+    .plat-car-detail{
+        position: absolute;
+        width: 100vw;
+        height: 100svh !important;
+        min-width: unset;
+        top: 150%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--bg);
+        display: none;
+        padding: 0;
+        margin: 0;
+        z-index: 999;
+    }
+
+    .car-rate-stars{
+        padding: 0 1em;
+    }
+
+    #carDetail{
+        padding: 0;
+    }
+
+    .carsec-head > h1{
+        display: none;
+    }
+
+    .logo4p{
+        display: flex;
+        width: 50px;
+        height: 50px;
+        overflow: visible;
+    }
+
+    .logo4p img{
+        width: 100%;
+        height: auto;
+        object-fit: fill;
+    }
+
+    .plat-user-loc{
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        z-index: 92;
+    }
+
+    .carsec-head{
+        margin-top: 3rem;
+        margin-bottom: 0;
+        height: 4em;
+        align-items: center;
+        justify-content: center;
+    }
+    .plat-cars-container{
+        height: calc(100% - 7em);
+        padding-bottom: 5em;
+    }
+
+    .searchbar-4p{
+        width: 100%;
+        margin: 0;
+        border-radius: 8px;
+        padding: .3125rem;
+        height: 3em;
+        display: flex;
+        background-color: var(--container);
+    }
+
+    .searchbar-4p input{
+        border: none;
+        width: 80%;
+        background-color: transparent;
+        height: 100%;
+        color: var(--text);
+        font-size: var(--font-med);
+        padding-left: 10px;
+    }
+    
+    .searchbar-4p input::placeholder{
+        color: var(--text-low);
+        font-size: var(--font-med);
+    }
+
+    .searchbar-4p .fa-magnifying-glass{
+        padding: 0 2.5px;
+        margin-left: 10px;
+        color: var(--text);
+        font-size: var(--font-med);
+    }
+
+    #filterBut4p,
+    #rentsFilterBut4p{
+        color: white;
+        background-color: var(--color-second);
+        border-radius: 50%;
+        padding: 10px;
+        margin: 0 5px;
+    }
+
+    #platCloseFilter{
+        color: var(--txt-black);
+    }
+
+    .plat-car-container{
+        width: 90%;
+        max-width: 500px;
+        min-width: 20em;
+        height: 280px;
+    }
+
+    #detailsClose{
+        display: none;
+    }
+
+    .car-detail-head{
+        display: flex;
+        width: 100%;
+        padding: 0.625em;
+    }
+
+    .plat-images-detail{
+        height: 20rem;
+        padding: 0;
+    }
+
+    .car-detail-head p{
+        font-size: var(--font-med);
+        color: var(--txt-black);
+        font-weight: bold;
+    }
+
+    .icn-bt{
+        color: var(--txt-black);
+        background-color: var(--container);
+        border-radius: 50%;
+        font-size: var(--font-lrg);
+        width: 2em;
+        height: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .plat-images-detail::-webkit-scrollbar,
+    .bookbuts{
+        display: none;
+    }
+
+    .plat-images-detail{
+        margin-top: 0;
+    }
+
+    .detail-image{
+        height: 95%;
+        width: 90vw;
+        min-width: 90vw;
+    }
+
+    .plat-rdetail-foot{
+        height: 5em;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #rentBut{
+        display: flex;
+        background-color: var(--color-second);
+        color: white;
+        height: 75%;
+        margin-top: auto;
+        width: 90%;
+        border-radius: 5px;
+    }
+
+    .r-car-inf .currence{
+        font-size: var(--font-med);
+    }
+    
+    .car-inf-name,
+    .car-inf-price{
+        font-size: var(--font-med);
+        font-weight: bolder;
+        color: var(--txt-black);
+    }
+
+    .pagesControl{
+        width: 90%;
+    }
+
+    #ordersDoc{
+        padding: 0.3em;
+        gap: 0;
+    }
+
+    .orders-type-f{
+        width: 95%;
+    }
+
+    #ordersDoc 
+    .searchbar-4p{
+        margin: .625em 0;
+   }
+
+   .rentals-main{
+        width: 100%;
+        height: calc(100% - 14em);
+        padding-top: 0;
+        padding-bottom: 0;
+   }
+
+    .rentals-head li{
+        color: var(--txt-black);
+        font-size: 0.7rem;
+    }
+
+    .rental-pay,
+    .rental-state{
+        font-size: 0.6rem;
+        padding: 2px 5px;
+    }
+
+    .rental-price{
+        color: var(--text);
+        font-weight: bold;
+        font-size: var(--font-sml);
+    }
+
+    .rental-order{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr 0.5fr 0.1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        min-height: 4em;
+        border-bottom: 1px solid var(--border-low);
+    }
+
+    .ordTf span{
+        font-size: 0.7rem;
+    }
+
+    .rentals-filter{
+        width: 100%;
+    }    
+
+    #docsDoc{
+        padding: 0;
+        overflow: hidden;
+        height: calc(100svh - 4.5em);
+    }
+
+    .docsDocBody{
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5em;
+        padding: 1rem;
+    }
+
+    .myProf{
+        width: 100%;
+        height: fit-content;
+    }
+    
+    .doc-accountstat{
+        height: fit-content;
+        width: 100% !important;
+        margin-top: 30px;
+    }
+
+    .upload-input-container{
+        flex-direction: column;
+    }
+
+    .custum-file-upload {
+        height: 200px;
+        width: 100%;
+    }
+
+    .nid-upload-container{
+        width: 95vw;
+        height: 600px;
+        padding: 1rem;
+    }
+
+    .doc-inp{
+        padding: 0.25rem;
+        width: 250px;
+        height: 200px;
+    }
+
+    .doc-image-container{
+        width: 180px;
+        height: 130px;
+        opacity: 0.5;
+        padding: 5px;
+    }
+
+    .doc-image-container img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #carDetail{
+        padding: 1rem 0;
+    }
+
+    .prev-images{
+        min-height: 250px;
+    }
+
+    .prev-img {
+        flex-grow: 0.3;
+    }
+    .prev-img:hover {
+        flex-grow: 4;
+    }
+    .prev-img:has(input:checked){
+        flex-grow: 4;
+    }
+
+    .car-det-details{
+        padding: 0.325em 0.625em;
+    }
+
+    .fav-share{
+        gap: 5px;
+    }
+
+    .car-det-det-info,
+    .car-det-rentprice{
+        width: 100svw;
+    }
+
+    .car-det-rentprice{
+        position: fixed;
+        top: 200%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100svw;
+        height: 100svh;
+        max-height: unset;
+        margin: 0;
+        transition: ease 0.6s;
+        z-index: 92;
+    }
+
+    #detCloseBut{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 99;
+        color: var(--txt-black);
+    }
+
+    #showContSec{
+        position: fixed;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, calc(-100% - 6em));
+        z-index: 98;
+        background-color: var(--color-second);
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+    }
+
+    .rev-profile-img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .rev-profile{
+        flex-direction: column;
+    }
+
+    .reviews-container{
+        padding: 1em 0;
+    }
+
+    .car-det-sec{
+        padding: 0;
+    }
+
+    .car-specs-det h5,
+    .car-specs-det p{
+        text-align: center;
+    }
+
+    /*-------------------------------------------------------*/
+
+    /*--------------------Help Section------------------*/
+
+    .help-sec{
+        width: 100%;
+        height: calc(100% - 4.5em);
+    }
+
+    .help-sec-head{
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .help-sec-head .fa-handshake-angle{
+        font-size: 1.5rem;
+    }
+
+    .help-sec-head h1{
+        font-size: 1.4rem;
+    }
+
+    .help-questions{
+        width: 100%;
+        margin-top: 0.5em;
+    }
+
+    /*---------------------------------------------------*/
+    
+    /*dbm*/
+
+    #dbm-content{
+        width: 100svw;
+        height: 100svh;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .dbm-table-head .title{
+        font-size: 0.8rem;
+    }
+
+    .bt-reg,
+    .bt-solid{
+        padding: 0 0.625em;
+        width: fit-content;
+        font-size: 0.8rem;
+    }
+
+    .dbm-input-holder select{
+        font-size: 0;
+    }
+
+    .dbm-input-holder option{
+        font-size: 1rem;
+    }
+
+    .dbm-head{
+        padding: 0.325em;
+    }
+
+    /*---------------------------------------------------*/
+
+}
+
+/*----------sidebar-----------*/
+.mobile-menu-icon {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    z-index: 1100;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100svh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 98;
+    }
+
+    #sidebar.active {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-icon {
+        display: block;
+    }
+}
+/*----------------------------------*/
+
+
+
+/*--------------------section account--------------------*/
+@media (max-width: 768px) {
+    .containeraccount {
+        padding: 10px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .input-wrapper input {
+        font-size: 16px;
+    }
+
+    .section h2 {
+        font-size: 18px;
+    }
+}
+/*-------------------------------*/

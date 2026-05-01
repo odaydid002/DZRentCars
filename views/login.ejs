@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/login.css" />
+    <link rel="stylesheet" href="../style/lib/fontawesome/all.min.css"/>
+    <link rel="stylesheet" href="../style/mobile.css">
+    <title>Login</title>
+  </head>
+
+  <body class="flex-col flex-center">
+    <img class="map-img" src="/assets/images/map.png" alt="Maps">
+    <main class="login-main flex-col flex-center">
+      <div class="login-container" id="loginContainer">
+        <div class="form-container sign-up">
+          <form id="signUpForm">
+            <h1 class="title-med" style="color: var(--txt-black);">Create Account</h1>
+            <div class="social-icons">
+              <a href="#" id="sicnG" class="icon bt-hover"><i class="fa-brands fa-google-plus-g"></i></a>
+              <a href="#" id="sicnF" class="icon bt-hover"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" id="sicnL" class="icon bt-hover"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <span class="para-mid">Use email for registeration</span>
+            <span class="para-mid" id="message"></span>
+            <div class="flex-row input-holder" style="width: 70%;">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" placeholder="Email" id="email"/>
+            </div>
+            <canvas id="captchaCanvas" width="150" height="50"></canvas>
+            <div class="flex-row input-holder" style="width: 50%;">
+              <i class="fa-solid fa-key"></i>
+              <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
+            </div>
+            <p id="result"></p>
+            <button class="bt-hover" onclick="validateCaptcha()">Sign Up</button>
+            <a id="dhai">Already have an account? SignIn</a>
+          </form>
+        </div>
+        <div class="form-container sign-in">
+          <form id="loginForm" action="/login" method="post">
+            <input type="text" hidden name="userplatdesc" id="userplatdesc">
+            <h1 class="title-med">Sign In</h1>
+            <div class="social-icons">
+              <a href="#" id="lIcnG" class="icon bt-hover"><i class="fa-brands fa-google-plus-g"></i></a>
+              <a href="#" id="lIcnF" class="icon bt-hover"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" id="lIcnL" class="icon bt-hover"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <span class="para-mid">or use your email password</span>
+            <div class="flex-row input-holder" style="width: 70%;">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" name="email" placeholder="Email" id="logMail"/>
+            </div>
+            <div class="flex-row input-holder" style="width: 70%;">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" name="password" placeholder="Password" id="logPass"/>
+            </div>
+            <a href="#">Forget Your Password?</a>
+            <button type="submit" class="bt bt-hover" id="signinBut" onclick="openLoader()">Sign In</button>
+            <a id="dhaa">Don't have an account? Signup</a>
+          </form>
+        </div>
+        <div class="toggle-container">
+          <div class="toggle">
+            <div class="toggle-panel toggle-left">
+              <h1>Welcome Back!</h1>
+              <p>Enter your personal details to use all of site features</p>
+              <button class="hidden bt-hover" id="login">Sign In</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+              <h1>Hello, Friend!</h1>
+              <p>Register with your personal details to use all of site features</p>
+              <button class="hidden bt-hover" id="register">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/js/main.js"></script>
+    <% if (messages.success_msg) { %>
+      <script> pushNotif("s", "<%= messages.success_msg %>") </script>
+    <% } %>
+    <% if (messages.error) { %>
+      <script> pushNotif("e", "<%= messages.error %>") </script>
+    <% } %>
+    <% if (messages.info_msg) { %>
+      <script> pushNotif("i", "<%= messages.info_msg %>") </script>
+    <% } %>
+    <script src="/js/darkmode.js"></script>
+    <script src="/lib/node_modules/platform/platform.js"></script>
+    <script src="/js/login.js"></script>
+    
+  </body>
+</html>

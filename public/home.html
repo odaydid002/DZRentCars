@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./style/lib/fontawesome/all.min.css">
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/checkbox.css">
+    <link rel="stylesheet" href="./style/platform.css">
+    <link rel="stylesheet" href="./lib/node_modules/flatpickr/dist/flatpickr.css">
+    <link rel="stylesheet" href="./lib/node_modules/mapbox-gl/dist/mapbox-gl.css">
+    <link rel="stylesheet" href="./style/mobile.css">
+    <link rel="stylesheet" href="./style/lagreScreen.css">
+    <title>Platform</title>
+</head>
+<body class="flex-row" id="platContent">
+    <nav class="plat-main-navigator flex-col center-start" id="platMainNavigator">
+        <label class="plat-logo flex-row flex-center">
+            <img src="./assets/logo.png" alt="LOGO" width="80%">
+        </label>
+        <ul class="plat-navigator flex-col center-start">
+            <label for="sectHome" class="plat-nav-element plat-nav-selected">
+                <div class="flex-col">
+                    <i class="fa-solid fa-house"></i>
+                    <p class="nav-label">Home</p>
+                </div>
+            </label>
+            <label for="sectMain" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-solid fa-car"></i>
+                    <p class="nav-label">Cars</p>
+                </div>
+            </label>
+            <label for="sectOrders" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-regular fa-clipboard phbb"></i>
+                    <p class="nav-label">Rentals</p>
+                </div>
+            </label>
+            <label for="sectFavorite" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-regular fa-heart phbb"></i>
+                    <p class="nav-label">Favorite</p>
+                </div>
+            </label>
+            <label for="sectRecent" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <p class="nav-label">Recent</p>
+                </div>
+            </label>
+            <label for="sectProfile" class="plat-nav-element">
+                <div class="plat-profile">
+                    <img src="./assets/images/user.jpg" alt="Profile" style="width: 100%;">
+                </div>
+            </label>
+        </ul>
+        <ul class="plat-user-info flex-col center-start">
+            <label for="sectDocs" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-regular fa-id-card"></i>
+                    <p class="nav-label">Documents</p>
+                </div>
+            </label>
+
+            <label for="sectHelp" class="plat-nav-element">
+                <div class="flex-col">
+                    <i class="fa-regular fa-handshake"></i>
+                    <p class="nav-label">Help</p>
+                </div>
+            </label>
+        </ul>
+        <a href="/logout" class="plat-nav-element plat-logout" title="Logout">
+            <div class="flex-col">
+                <i class="fa-solid fa-person-walking-arrow-right"></i>
+                <p class="nav-label" style="color: var(--color-second);">Logout</p>
+            </div>
+        </a>
+    </nav>
+    <img class="map-img" src="./assets/images/map.png" alt="Maps">
+    
+    <script src="./js/main.js"></script>
+    <script src="./js/darkmode.js"></script>
+    <script src="./lib/node_modules/gsap/dist/gsap.min.js"></script>
+    <script src="./lib/node_modules/gsap/dist/ScrollTrigger.min.js"></script>
+    <script src="./lib/node_modules/svelte-range-slider-pips/dist/range-slider-pips.js"></script>
+    <script src="./lib/node_modules/flatpickr/dist/flatpickr.js"></script>
+    <script src="./js/platform.js"></script>
+    <script src="./js/home/detail.js"></script>
+</body>
+</html>

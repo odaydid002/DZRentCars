@@ -1,0 +1,72 @@
+@media (min-height: 1600px) {
+    :root{
+        --doc-padding: 5vh;
+        --font-med: 0.9vw;
+        --font-sml: 0.8vw;
+        --font-lrg: 1.3vw;
+    }
+
+    .drk-txt{
+        color: var(--text);
+    }
+    
+    .title-min,
+    .title-min span{
+        font-size: 1vw;
+    }
+    
+    .title-xlarge,
+    .title-xlarge span{
+        font-size: 4vw;
+    }
+
+    .about-title{
+        width: 100%;
+    }
+
+    .nav-element{
+        margin: 0 1vw;
+    }
+
+    .about-content{
+        width: 90%;
+        height: 75%;
+    }
+
+    .about-cont{
+        width: 90%;
+    }
+    
+    .title-large,
+    .title-large span{
+        font-size: 2.5vw;
+    }
+    
+    .para-mid,
+    .para-mid span{
+        font-size: 1.2vw;
+    }
+
+    .car-logo{
+        width: 8vw;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .phones-container img{
+        width: 40vw;
+    }
+
+    .frame1{
+        left: 15%;
+    }
+      
+    .frame2{
+        left: 45%;
+        top: 40%;
+    }
+
+    .car-svg{
+        width: 70vw;
+    }
+}

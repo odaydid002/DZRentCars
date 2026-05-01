@@ -1,0 +1,240 @@
+.login-container{
+    background-color: var(--container);
+    border-radius: 15px;
+    position: fixed;
+    overflow: hidden;
+    width: 65%;
+    min-width: 500px;
+    height: 80%;
+    min-height: 400px;
+}
+
+.login-container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.login-container span{
+    font-size: 12px;
+}
+
+.login-container a{
+    color: var(--text);
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.login-container button{
+    background-color: var(--color-main);
+    color: white;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.login-container button.hidden{
+    background-color: transparent;
+    border-color: #fff;
+}
+
+#signUpForm,
+#loginForm{
+    background-color: var(--container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.login-container.active .sign-in{
+    transform: translateX(100%);
+}
+
+.sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.login-container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons{
+    margin: 20px 0;
+}
+
+.social-icons a{
+    border: 1px solid var(--border);
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+}
+
+.toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
+
+.login-container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle{
+    background-color: var(--color-main);
+    height: 100%;
+    background: linear-gradient(to right, var(--color-main), var(--color-second));
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.login-container.active .toggle{
+    transform: translateX(50%);
+}
+
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left{
+    transform: translateX(-200%);
+}
+
+.login-container.active .toggle-left{
+    transform: translateX(0);
+}
+
+.toggle-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.login-container.active .toggle-right{
+    transform: translateX(200%);
+}
+
+.fa-google-plus-g{
+    color: rgb(192, 59, 59);
+}
+
+.fa-facebook-f{
+    color: rgb(49, 85, 202);
+}
+
+.fa-linkedin-in{
+    color: rgb(55, 158, 158);
+}
+
+.icon{
+    transition: all ease-in-out .5s;
+}
+
+.icon:hover i{
+    border: none;
+    color: white;
+}
+
+#sicnG:hover,
+#lIcnG:hover{
+    background-color: rgb(206, 57, 57);
+}
+
+
+#sicnF:hover,
+#lIcnF:hover{
+    background-color: rgb(41, 115, 199);
+}
+
+#sicnL:hover,
+#lIcnL:hover{
+    background-color: rgb(27, 134, 148);
+}
+
+#dhaa,
+#dhai{
+    display: none;
+}
+
+.input-holder{
+    height: var(--input-height-mid);
+}
+
+.login-main{
+    width: 100vw;
+    height: 100vh;
+}
+
+.map-img{
+    position: fixed;
+    width: 150%;
+    height: auto;
+    z-index: 0;
+    opacity: 0.1;
+}

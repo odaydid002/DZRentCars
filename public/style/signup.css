@@ -1,0 +1,368 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+*{
+    transition: ease 0.7s;
+}
+
+.doc{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signupForm{
+    position: relative;
+    width: 65%;
+    min-width: 500px;
+    height: 80%;
+    min-height: 550px;
+    display: grid;
+    border-radius: 15px;
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background-color: var(--container);
+    padding: 20px;
+}
+
+.form-message{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.form{
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.formBody{
+    width: 100%;
+}
+
+.input-container{
+    width: 80%;
+    padding: 5px;
+}
+
+.agree{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 20px 10px;
+}
+
+.agree label{
+    color: var(--text);
+    font-size: var(--font-sml);
+    padding: 0 10px;
+} 
+
+.sidel{
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1;
+}
+
+.sidelHead{
+    overflow: hidden;
+    padding: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.pictureConainer{
+    overflow: hidden;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pictureConainer::after,
+.pictureConainer::before{
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    transform: scale(1.02);
+    border-radius: 50%;
+    border: 3px solid var(--color-main);
+    opacity: 0.4;
+}
+
+.pictureConainer::before{
+    box-shadow: 0 0 20px var(--color-second);
+    border: none;
+    transform: scale(1.01);
+}
+
+.pictChange{
+    max-width: 100%;
+    z-index: 999;
+}
+
+.sidleBody{
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.inputHolderTwo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.hold{
+    width: 40%;
+}
+
+.hold1{
+    width: 100%;
+}
+
+.formTitle{
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.inpth{
+    width: 90%;
+}
+
+.halfInp{
+    width: 50%;
+}
+
+.iti__selected-dial-code{
+    color:var(--text);
+}
+
+.iti__country-list{
+    background-color: transparent;
+}
+
+.errorMsg{
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 50px;
+    border: 2px solid rgb(216, 52, 52);
+    background-color: rgba(234, 29, 29, 0.121);
+    color: rgb(216, 52, 52);
+    border-radius: 5px;
+}
+
+.btin{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    cursor: pointer;
+    background-color: rgb(216, 52, 52);
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.input-field{
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    border-color: transparent;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+}
+
+.input-container label  {
+    font-size: var(--font-sml);
+    color: var(--text);
+}
+
+.input-info{
+    padding-left: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background-color: transparent;
+    height: var(--input-height-sml);
+    color: var(--text);
+    font-size: var(--font-sml);
+}
+
+input:disabled{
+    opacity: 0.6;
+}
+
+.input-info:focus{
+    outline: none;
+}
+
+.input-info::placeholder{
+    color: var(--text-low);
+}
+
+.input-container-row2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#Registre{
+    width: 75%;
+    height: var(--input-height-sml);
+    border-radius: 6px;
+    font-size: var(--font-sml);
+    color: white;
+    background-color: var(--color-second);
+}   
+
+#iti-0__country-listbox{
+    background-color: var(--container);
+}
+
+#iti-0__country-listbox > li,
+.iti__dial-code,
+.iti__country-name{
+    color: var(--text);
+}
+
+.map-img{
+    position: fixed;
+    width: 150%;
+    height: auto;
+    z-index: 0;
+    opacity: 0.1;
+}
+
+.tips {
+    font-size: var(--font-sml);
+    display: flex;
+    align-items: center;
+}
+
+.tips p {
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 60px;
+}
+
+#passEye:has(input[type="checkbox"]:checked) .fa-eye {
+    display: flex;
+}
+
+#passEye:has(input[type="checkbox"]:checked) .fa-eye-slash {
+    display: none;
+}
+
+#passEye:has(input[type="checkbox"]:not(:checked)) .fa-eye {
+    display: none;
+}
+
+#passEye:has(input[type="checkbox"]:not(:checked)) .fa-eye-slash {
+    display: flex;
+}
+
+#passEye{
+    position: absolute;
+    top: 62%;
+    right: 15px;
+    transform: translateY(-50%);
+}
+  
+#passEye i{
+    font-size: var(--font-med);
+    color: var(--text);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: ease-in-out 0.6s;
+}
+
+#passEye i:hover{
+    scale: 1.05;
+    opacity: 1;
+}
+
+.sxlb{
+    font-size: var(--text);
+    font-size: var(--font-sml);
+    gap: 0.5rem;
+}
+
+.sxlb input[type=radio] {
+    --s: 1em;    
+    --c: var(--color-main);
+    
+    height: var(--s);
+    aspect-ratio: 1;
+    border: calc(var(--s)/8) solid #939393;
+    padding: calc(var(--s)/8);
+    background: 
+       radial-gradient(farthest-side,var(--c) 94%,#0000) 
+       50%/0 0 no-repeat content-box;
+    border-radius: 50%;
+    outline-offset: calc(var(--s)/10);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    font-size: inherit;
+    transition: .3s;
+}
+
+.sxlb input[type=radio]:checked {
+    border-color: var(--c);
+    background-size: 100% 100%;
+}
+  
+@media print {
+    .sxlb input[type=radio] {
+      -webkit-appearance: auto;
+      -moz-appearance: auto;
+      appearance: auto;
+      background: none;
+    }
+}
+  
+.sxlb label {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:5px 0;
+    cursor: pointer;
+}

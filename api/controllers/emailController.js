@@ -57,7 +57,7 @@ exports.sendLoginLink = async (req, res) => {
             [email, token, expiresAt]
         );
 
-        const prodUrl = process.env.PROD_URL || `http://localhost:${process.env.PORT}`;
+        const prodUrl = process.env.PROD_URL || `https://dzrents.vercel.app/:${process.env.PORT}`;
         const loginLink = `${prodUrl}/signup?token=${token}`;
 
         const transporter = nodemailer.createTransport({

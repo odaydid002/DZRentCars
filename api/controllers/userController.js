@@ -612,7 +612,6 @@ const getVerClients = async (req, res) => {
 
 const banUser = async (req, res) => {
     try {
-1
         const {uid} = req.params
         const {period = 30, reason = ""} = req.query
 
@@ -638,7 +637,6 @@ const banUser = async (req, res) => {
 
 const unbanUser = async (req, res) => {
     try {
-1
         const {uid} = req.params
         if (!uid) return res.status(400).json({error: "ID Required!"})
 

@@ -1,7 +1,3 @@
-api/controllers
-api/middleware
-api/models
-api/config
 .git
 node_modules
 temp

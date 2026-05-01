@@ -1323,6 +1323,12 @@ app.get("/logout", (req, res, next) => {
 
 /*---------------------------------------------------------*/
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+// Only start the server in local development, not in serverless environment
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+}
+
+// Export app for Vercel serverless function
+module.exports = app;

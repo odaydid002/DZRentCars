@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build || echo 'No build script'",
+  "public": false,
+  "functions": {
+    "api/index.js": {
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "rewrites": [
+    {
+      "source": "/public/(.*)",
+      "destination": "/public/$1"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const vehiclesController = require("../controllers/vehiclesController");
+const vehiclesController = require("../api/controllers/vehiclesController");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("../../cloudinaryConfig");
+const cloudinary = require("../cloudinaryConfig");
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {

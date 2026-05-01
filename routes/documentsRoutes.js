@@ -1,5 +1,5 @@
 const express = require("express");
-const { getDocs, addDocs, getReq } = require("../controllers/documentsController");
+const { getDocs, addDocs, getReq } = require("../api/controllers/documentsController");
 
 const router = express.Router();
 

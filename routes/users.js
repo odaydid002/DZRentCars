@@ -18,7 +18,7 @@ const {
     getStatics,
     getVerClients,
     updateUser
-} = require("../controllers/userController");
+} = require("../api/controllers/userController");
 
 const router = express.Router();
 

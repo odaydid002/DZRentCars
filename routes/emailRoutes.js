@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const emailController = require('../controllers/emailController');
+const emailController = require('../api/controllers/emailController');
 
 router.post('/send-login-link', emailController.sendLoginLink);
 router.post('/send', emailController.sendMessage);

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require('multer');
 const upload = multer();
-const discountsController = require("../controllers/discountsController");
+const discountsController = require("../api/controllers/discountsController");
 
 router.get("/coupon/use", discountsController.useCoupon);
 router.get("/coupon/check", discountsController.checkCoupon);

@@ -17,7 +17,7 @@ const {
     returnOrder,
     removeOrder,
     getInvoice
-} = require("../controllers/orderesController");
+} = require("../api/controllers/orderesController");
 
 router.get("/invoice/:rid", getInvoice);
 router.get("/stats", getStats);

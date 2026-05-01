@@ -1172,7 +1172,7 @@ app.get('/clients/verification', checkNotAuth, (req, res) => {
 
 /*-------------------------------------------------------------*/ 
 
-app.get("/signup",checkAuth, async (req, res) => {
+app.get("/signup", async (req, res) => {
     const wilayas = await pool.query("SELECT * FROM wilaya WHERE 1=1");
     const wilaya = wilayas.rows;
     res.render("signup", {wilaya:wilaya})

@@ -1,4 +1,10 @@
-const userForm = document.getElementById('signupForm')
+const userForm = document.getElementById('signupForm');
+const pass = document.getElementById('password') || document.querySelector('input[name="password"]');
+const rePassword = document.getElementById('rePassword') || document.querySelector('input[name="rePassword"]');
+const username = document.getElementById('username') || document.querySelector('input[name="username"]');
+const Fname = document.getElementById('fname') || document.querySelector('input[name="fname"]');
+const Lname = document.getElementById('lname') || document.querySelector('input[name="lname"]');
+const phone = document.getElementById('phone-number-input');
 
 userForm.addEventListener('submit', function (e) {
     const errors = [];

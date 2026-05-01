@@ -1,3 +1,23 @@
+// Initialize Lenis smooth scroll
+const lenis = new Lenis({
+  duration: 1.5,
+  easing: (t) => 1 - Math.pow(1 - t, 3),
+});
+
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// Cleanup function for Lenis
+window.addEventListener('beforeunload', () => {
+  gsap.ticker.remove((time) => {
+    lenis.raf(time * 1000);
+  });
+  lenis.destroy();
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".nav-link").forEach(link => {
       link.addEventListener("click", function (event) {
